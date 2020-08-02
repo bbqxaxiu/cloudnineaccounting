@@ -7,17 +7,8 @@ from datetime import datetime
 from datetime import date
 
 app = Flask(__name__)
-
 DATABASEURI = 'postgresql://localhost/nhulam'
-
 engine = create_engine(DATABASEURI)
-
-engine.execute("""CREATE TABLE IF NOT EXISTS test (
-  id serial,
-  name text
-);""")
-engine.execute("""INSERT INTO test(name) VALUES ('grace doan'), ('alan turing'), ('ada lovelace');""")
-
 
 @app.before_request
 def before_request():
@@ -50,7 +41,7 @@ def add():
     status = request.form['status']
     tuition = request.form['tuition']
     paid = request.form['paid']
-
+    
     g.conn.execute("INSERT INTO students (fname, lname, program, status, tuition, paid) VALUES (%s, %s, %s, %s, %s, %s)", fname, lname, program, status, tuition, paid)
     
     return redirect('/')

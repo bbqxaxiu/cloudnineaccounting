@@ -32,6 +32,7 @@
 
     </style>
     <body>
+        <h1>Students</h1>
         <div class="wrapper">
             <div class="box"><u>ID</u></div>
             <div class="box"><u>First Name</u></div>
@@ -61,8 +62,20 @@
             <form method="POST" action="/add">
                 <p>First name: <input type="text" name="fname"></p>
                 <p>Last name: <input type="text" name="lname"></p>
-                <p>Program: <input type="text" name="program"></p>
-                <p>Status: <input type="text" name="status"></p>
+                <p>
+                    <label for="program">Program:</label>
+                    <select id="programs" name="program">
+                        <option>f</option>
+                        <option>n</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="status">Status:</label>
+                    <select id="statuses" name="status">
+                        <option>current</option>
+                        <option>graduated</option>
+                    </select>
+                </p>
                 <p>Tuition <input type="number" name="tuition"></p>
                 <p>Paid: <input type="number" name="paid"></p>
                 <p><input type="submit" value="Insert"></p>
