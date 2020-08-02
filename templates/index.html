@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Cloud Nine Beauty School</title>
+    </head>
+    <style>
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(8, minmax(50px, 1fr));
+            color: #444;
+            max-width: 800px;
+        }
+
+        .row {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(8, minmax(50px, 1fr));
+        }
+        
+        .row:nth-child(odd) { background-color: blanchedalmond !important; }
+
+
+        div:nth-child(9) { grid-row-start: 2; }
+        div:nth-child(10) { grid-row-start: 3; }
+
+        .box {
+            color: black;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+    </style>
+    <body>
+        <div class="wrapper">
+            <div class="box"><u>ID</u></div>
+            <div class="box"><u>First Name</u></div>
+            <div class="box"><u>Last Name</u></div>
+            <div class="box"><u>Program</u></div>
+            <div class="box"><u>Status</u></div>
+            <div class="box"><u>Tuition</u></div>
+            <div class="box"><u>Paid</u></div>
+            <div class="box"><u>Balance</u></div>
+
+            {% for key, value in students.items() %}
+            <div class="row">
+                <div class="box">{{value[0]}}</div>
+                <div class="box">{{value[1]}}</div>
+                <div class="box">{{value[2]}}</div>
+                <div class="box">{{value[3]}}</div>
+                <div class="box">{{value[4]}}</div>
+                <div class="box">{{value[5]}}</div>
+                <div class="box">{{value[6]}}</div>
+                <div class="box">{{value[7]}}</div>
+            </div>
+            {% endfor %}
+            <!-- Table Row -->
+        </div>
+        <div>
+            Insert new student: 
+            <form method="POST" action="/add">
+                <p>First name: <input type="text" name="fname"></p>
+                <p>Last name: <input type="text" name="lname"></p>
+                <p>Program: <input type="text" name="program"></p>
+                <p>Status: <input type="text" name="status"></p>
+                <p>Tuition <input type="number" name="tuition"></p>
+                <p>Paid: <input type="number" name="paid"></p>
+                <p><input type="submit" value="Insert"></p>
+            </form>
+        </div>
+    </body>
+</html>
