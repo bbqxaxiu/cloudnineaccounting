@@ -5,81 +5,119 @@
         <title>Cloud Nine Beauty School</title>
     </head>
     <style>
-        .wrapper {
-            display: grid;
-            grid-template-columns: repeat(8, minmax(50px, 1fr));
-            color: #444;
-            max-width: 800px;
+
+        .column {
+            float: left;
+            width: 45%; 
+            padding: 20px; 
         }
 
-        .row {
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: repeat(8, minmax(50px, 1fr));
+        .payments {
+            border-left: 1px solid black; 
+        }
+
+        .inline-table {
+            display: inline-block;
         }
         
         .row:nth-child(odd) { background-color: blanchedalmond !important; }
 
-
-        div:nth-child(9) { grid-row-start: 2; }
-        div:nth-child(10) { grid-row-start: 3; }
-
-        .box {
-            color: black;
-            padding: 20px;
-            overflow: hidden;
-        }
-
     </style>
     <body>
-        <h1>Students</h1>
-        <div class="wrapper">
-            <div class="box"><u>ID</u></div>
-            <div class="box"><u>First Name</u></div>
-            <div class="box"><u>Last Name</u></div>
-            <div class="box"><u>Program</u></div>
-            <div class="box"><u>Status</u></div>
-            <div class="box"><u>Tuition</u></div>
-            <div class="box"><u>Paid</u></div>
-            <div class="box"><u>Balance</u></div>
-
-            {% for key, value in students.items() %}
-            <div class="row">
-                <div class="box">{{value[0]}}</div>
-                <div class="box">{{value[1]}}</div>
-                <div class="box">{{value[2]}}</div>
-                <div class="box">{{value[3]}}</div>
-                <div class="box">{{value[4]}}</div>
-                <div class="box">{{value[5]}}</div>
-                <div class="box">{{value[6]}}</div>
-                <div class="box">{{value[7]}}</div>
+        <div class="container">
+            <div class="column">
+                <h2>Students</h2>
+                <table class="in-line-table">
+                    <tr>
+                        <td><u>Student ID</u></td>
+                        <td><u>First Name</u></td>
+                        <td><u>Last Name</u></td>
+                        <td><u>Program</u></td>
+                        <td><u>Status</u></td>
+                        <td><u>Tuition</u></td>
+                        <td><u>Paid</u></td>
+                        <td><u>Balance</u></td>
+                    </tr>
+                    {% for key, value in students.items() %}
+                    <tr class="row">
+                        <td>{{value[0]}}</td>
+                        <td>{{value[1]}}</td>
+                        <td>{{value[2]}}</td>
+                        <td>{{value[3]}}</td>
+                        <td>{{value[4]}}</td>
+                        <td>{{value[5]}}</td>
+                        <td>{{value[6]}}</td>
+                        <td>{{value[7]}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br/>
+                <div>
+                    Insert new student: 
+                    <form method="POST" action="/add_student">
+                        <p>First name: <input type="text" name="fname"></p>
+                        <p>Last name: <input type="text" name="lname"></p>
+                        <p>
+                            <label for="program">Program:</label>
+                            <select id="programs" name="program">
+                                <option>f</option>
+                                <option>n</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="status">Status:</label>
+                            <select id="statuses" name="status">
+                                <option>current</option>
+                                <option>graduated</option>
+                            </select>
+                        </p>
+                        <p>Tuition <input type="number" name="tuition"></p>
+                        <p>Paid: <input type="number" name="paid"></p>
+                        <p><input type="submit" value="Insert"></p>
+                    </form>
+                </div>
             </div>
-            {% endfor %}
-            <!-- Table Row -->
-        </div>
-        <div>
-            Insert new student: 
-            <form method="POST" action="/add">
-                <p>First name: <input type="text" name="fname"></p>
-                <p>Last name: <input type="text" name="lname"></p>
-                <p>
-                    <label for="program">Program:</label>
-                    <select id="programs" name="program">
-                        <option>f</option>
-                        <option>n</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="status">Status:</label>
-                    <select id="statuses" name="status">
-                        <option>current</option>
-                        <option>graduated</option>
-                    </select>
-                </p>
-                <p>Tuition <input type="number" name="tuition"></p>
-                <p>Paid: <input type="number" name="paid"></p>
-                <p><input type="submit" value="Insert"></p>
-            </form>
+            <div class="column payments">
+                <h2>Payments</h2>
+                <table class="in-line-table">
+                    <tr>
+                        <td><u>Student ID</u></td>
+                        <td><u>Payment ID</u></td>
+                        <td><u>First Name</u></td>
+                        <td><u>Last Name</u></td>
+                        <td><u>Date</u></td>
+                        <td><u>Amount</u></td>
+                    </tr>
+                    {% for key, value in payments.items() %}
+                    <tr class="row">
+                        <td>{{value[0]}}</td>
+                        <td>{{value[1]}}</td>
+                        <td>{{value[2]}}</td>
+                        <td>{{value[3]}}</td>
+                        <td>{{value[4]}}</td>
+                        <td>{{value[5]}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br/>
+                <div>
+                    Insert new payment: 
+                    <form method="POST" action="/add_payment">
+                        <p>Student ID: <input type="text" name="uuid"></p>
+                        <p>Date: <input type="date" name="date"></p>
+                        <p>Amount: <input type="number" name="amount"></p>
+                        <p><input type="submit" value="Insert"></p>
+                    </form>
+                </div>
+                <br/>
+                <br/>
+                <div>
+                    Generate receipt:
+                    <form method="POST" action="/generate_receipt">
+                        <p>Student ID: <input type="text" name="uuid"> <input type="submit" value="Generate"></p>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>
