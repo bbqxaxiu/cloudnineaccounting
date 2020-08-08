@@ -93,7 +93,7 @@ def generate_receipt():
 
     entry_count = 1 
     for key, value in payments.items(): 
-      f.write(str(entry_count) + ". " + str(value[0]) + "\t" + str(value[1]) + "\n")
+      f.write(str(entry_count) + ". " + str(value[0]) + "\t" + "$" + str(value[1]) + "\n")
       entry_count += 1
 
     return redirect('/')
